@@ -1,6 +1,9 @@
+import { useEffect, useRef } from "react";
 import { useForm } from "../Hooks/useForm";
 
 export const FormularioComponent = () => {
+  const focusRef = useRef();
+  console.log(focusRef);
   /*EL initialForm lo paso por el Hook useForm es un Hook propio el cual el initialForm pasa vacio
   para despues por teclado igresa datos.
   */
@@ -15,6 +18,9 @@ export const FormularioComponent = () => {
     event.preventDefault();
     console.log(formState);
   };
+  useEffect(() => {
+    focusRef.current.focus();
+  }, []);
 
   return (
     <form onSubmit={onSubmit}>
@@ -23,6 +29,7 @@ export const FormularioComponent = () => {
           User Name:
         </label>
         <input
+          ref={focusRef}
           type="text"
           className="form-control"
           name="userName"
